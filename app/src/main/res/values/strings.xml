@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AutoDex</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="notification">Notification</string>
+
+    <string name="fav"><h2><B>Sundar Pichai</B></h2> is near you,Say Hello !</string>
+    <string name="forgotpassword">Reset Password</string>
+</resources>
