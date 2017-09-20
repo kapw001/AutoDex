@@ -26,13 +26,15 @@ public class ContactsProvider {
         Cursor c = null;
         try {
             c = pContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-            while (c.moveToNext()) {
-                String lName = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+            if (c != null && c.getCount() > 0) {
+                while (c.moveToNext()) {
+                    String lName = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                    String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
 
-                Uri uri = getPhotoUri(pContext, Long.parseLong(contactId));
-                Log.e(TAG, "load: " + contactId + " " + uri);
-                lContacts.add(new Contact(lName, uri));
+                    Uri uri = getPhotoUri(pContext, Long.parseLong(contactId));
+//                    Log.e(TAG, "load: " + contactId + " " + uri);
+                    lContacts.add(new Contact(lName, uri));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,21 +85,24 @@ public class ContactsProvider {
                                     + "'", null, null);
 
             if (cursor != null) {
-                if (!cursor.moveToFirst()) {
-                    return null; // no photo
-                }
+                Uri person = ContentUris.withAppendedId(
+                        ContactsContract.Contacts.CONTENT_URI, contactId);
+                Uri uri = Uri.withAppendedPath(person,
+                        ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+                cursor.close();
+                return uri;
+
             } else {
+                cursor.close();
                 return null; // error in cursor process
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
             return null;
         }
 
-        Uri person = ContentUris.withAppendedId(
-                ContactsContract.Contacts.CONTENT_URI, contactId);
-        return Uri.withAppendedPath(person,
-                ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+
     }
 }

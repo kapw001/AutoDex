@@ -30,7 +30,7 @@ public class FavouritesFragment extends BaseFragment implements GridRecyclerView
 
     private RecyclerView recyclerView;
     private GridRecyclerViewAdapter gridRecyclerViewAdapter;
-    private List<Contact> list;
+    private List<Contact> list=new ArrayList<>();
 
     @Nullable
     @Override

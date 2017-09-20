@@ -2,6 +2,7 @@ package autodex.com.autodex.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +25,7 @@ public class SignUpActivity extends BaseActivity {
     private EditText name, phonenumber;
     private TextView signin;
     private Button signup;
+    private TextInputLayout phonenumbertxt, nametxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,11 @@ public class SignUpActivity extends BaseActivity {
     private void init() {
         phonenumber = (EditText) findViewById(R.id.phonenumber);
         name = (EditText) findViewById(R.id.name);
+        phonenumbertxt = (TextInputLayout) findViewById(R.id.phonenumbertxt);
+        nametxt = (TextInputLayout) findViewById(R.id.nametxt);
         signup = (Button) findViewById(R.id.signup);
         signin = (TextView) findViewById(R.id.signin);
+
     }
 
 
@@ -79,13 +84,13 @@ public class SignUpActivity extends BaseActivity {
 
     private boolean validate(String pnumber, String n) {
 
-        phonenumber.setError(null);
-        name.setError(null);
+        phonenumbertxt.setError(null);
+        nametxt.setError(null);
         if (!Utility.emptyValdate(n)) {
-            name.setError("Name cannot be empty.");
+            nametxt.setError("Name cannot be empty.");
             return false;
         } else if (!Utility.emptyValdate(pnumber)) {
-            phonenumber.setError("Enter a valid mobile number.");
+            phonenumbertxt.setError("Enter a valid mobile number.");
             return false;
         } else {
             return true;

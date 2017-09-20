@@ -1,8 +1,13 @@
 package autodex.com.autodex.activitys;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,6 +29,8 @@ public class LoginActivity extends BaseActivity {
     private TextView signup, forgotPassword;
     private Button signin;
 
+    private TextInputLayout phonenumbertxt, passwordtxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,8 @@ public class LoginActivity extends BaseActivity {
     private void init() {
         phonenumber = (EditText) findViewById(R.id.phonenumber);
         password = (EditText) findViewById(R.id.password);
+        phonenumbertxt = (TextInputLayout) findViewById(R.id.phonenumbertxt);
+        passwordtxt = (TextInputLayout) findViewById(R.id.passwordtxt);
 
         signup = (TextView) findViewById(R.id.signup);
         forgotPassword = (TextView) findViewById(R.id.forgotpassword);
@@ -71,7 +80,7 @@ public class LoginActivity extends BaseActivity {
 
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
-                transitionActivity();
+//                transitionActivity();
 
 
             }
@@ -82,7 +91,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ForgotActivity.class);
                 startActivity(intent);
-                transitionActivity();
+//                transitionActivity();
             }
         });
 
@@ -91,13 +100,13 @@ public class LoginActivity extends BaseActivity {
 
     private boolean validate(String pnumber, String pword) {
 
-        phonenumber.setError(null);
-        password.setError(null);
+        phonenumbertxt.setError(null);
+        passwordtxt.setError(null);
         if (!Utility.emptyValdate(pnumber)) {
-            phonenumber.setError("Enter a valid mobile number.");
+            phonenumbertxt.setError("Enter a valid mobile number.");
             return false;
         } else if (!Utility.emptyValdate(pword)) {
-            password.setError("Password cannot be empty.");
+            passwordtxt.setError("Password cannot be empty.");
             return false;
         } else {
             return true;
@@ -105,4 +114,14 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    public static void setErrorMsg(String msg, EditText viewId) {
+        //Osama ibrahim 10/5/2013
+        int ecolor = Color.BLACK; // whatever color you want
+        String estring = msg;
+        ForegroundColorSpan fgcspan = new ForegroundColorSpan(ecolor);
+        SpannableStringBuilder ssbuilder = new SpannableStringBuilder(estring);
+        ssbuilder.setSpan(fgcspan, 0, estring.length(), 0);
+        viewId.setError(ssbuilder);
+
+    }
 }

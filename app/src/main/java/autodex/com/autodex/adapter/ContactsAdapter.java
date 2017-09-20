@@ -1,6 +1,9 @@
 package autodex.com.autodex.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +45,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
 
     public void updateList(List<Contact> mContacts) {
-        this.mContacts.clear();
+        this.mContacts = new ArrayList<>();
         this.mContacts.addAll(mContacts);
         fillSections();
 
@@ -95,7 +98,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public int getItemCount() {
-        return mContacts.size();
+//        return mContacts.size();
+
+        return (mContacts == null) ? 0 : mContacts.size();
     }
 
 
@@ -117,6 +122,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
             mSectionName.setText(pSection);
             mSectionName.setVisibility(bShowSection ? View.VISIBLE : View.GONE);
 
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+//                        context.getContentResolver(), pItem.getUri());
+//                img_contact.setImageBitmap(bitmap);
+////                Picasso.with(context).load(pItem.getUri()).fit().into(img_contact);
+//
+//            } catch (Exception e) {
+//                img_contact.setImageResource(R.mipmap.ic_launcher);
+////                Picasso.with(context).load(R.mipmap.ic_launcher).fit().into(img_contact);
+//            }
+
 
             if (pItem.getUri() != null) {
                 Picasso.with(context).load(pItem.getUri()).fit().into(img_contact);
@@ -124,6 +140,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
                 img_contact.setVisibility(View.VISIBLE);
             } else {
                 img_contact.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(R.mipmap.ic_launcher).fit().into(img_contact);
             }
 
         }

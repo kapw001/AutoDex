@@ -7,6 +7,19 @@ import android.net.Uri;
  */
 public class Contact {
     private String mName;
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Contact() {
+    }
+
     private Uri uri;
     private int imgId;
 

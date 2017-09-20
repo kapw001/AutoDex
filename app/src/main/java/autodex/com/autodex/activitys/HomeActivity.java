@@ -232,8 +232,6 @@ public class HomeActivity extends BaseActivity
 
     private void callFragment(int id) {
         getSupportActionBar().setTitle("AutoDex");
-
-
         switch (id) {
 
             case R.id.contact:
@@ -272,7 +270,7 @@ public class HomeActivity extends BaseActivity
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
 
-                break;
+                return;
         }
 
         navigationView.getMenu().findItem(id).setChecked(true);

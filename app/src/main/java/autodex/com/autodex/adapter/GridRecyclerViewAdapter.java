@@ -120,7 +120,8 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
     @Override
     public int getItemCount() {
 
-        return list.size();
+//        return list.size();
+        return (list == null) ? 0 : list.size();
     }
 
     public interface ItemListener {

@@ -1,6 +1,7 @@
 package autodex.com.autodex.activitys;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,6 +22,7 @@ public class ForgotActivity extends BaseActivity {
     private EditText phonenumber;
     private TextView signin;
     private Button forgotpassword;
+    private TextInputLayout phonenumbertxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class ForgotActivity extends BaseActivity {
     private void init() {
         phonenumber = (EditText) findViewById(R.id.phonenumber);
         forgotpassword = (Button) findViewById(R.id.forgotpassword);
+        phonenumbertxt = (TextInputLayout) findViewById(R.id.phonenumbertxt);
         signin = (TextView) findViewById(R.id.signin);
     }
 
@@ -75,9 +78,11 @@ public class ForgotActivity extends BaseActivity {
 
     private boolean validate(String pnumber) {
 
-        phonenumber.setError(null);
+        phonenumbertxt.setErrorEnabled(false);
+        phonenumbertxt.setError(null);
         if (!Utility.emptyValdate(pnumber)) {
-            phonenumber.setError("Enter a valid mobile number.");
+            phonenumbertxt.setErrorEnabled(true);
+            phonenumbertxt.setError("Enter a valid mobile number.");
             return false;
         } else {
             return true;
